@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* ── Kanvan palette ── */
+  --color-deep:    #001D39;
+  --color-surface: #0A4174;
+  --color-muted:   #49769F;
+  --color-accent:  #4E8EA2;
+  --color-subtle:  #6EA2B3;
+  --color-glow:    #7BBDE8;
+  --color-light:   #BDD8E9;
+
+  --color-background: var(--color-deep);
+  --color-foreground: var(--color-light);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--color-deep);
+  color: var(--color-light);
+  font-family: var(--font-sans);
+}
+
+/* ── Auth page effects ── */
+
+.geo-gradient {
+  background: linear-gradient(135deg, #001D39 0%, #00142a 50%, #0A2540 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.geo-shape {
+  position: absolute;
+  filter: blur(80px);
+  opacity: 0.4;
+  z-index: 0;
+  animation: move 20s infinite alternate;
+}
+
+@keyframes move {
+  from { transform: translate(-10%, -10%) rotate(0deg); }
+  to   { transform: translate(10%, 10%) rotate(30deg);  }
+}
+
+.glass-card {
+  background: rgba(10, 65, 116, 0.25);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(73, 118, 159, 0.15);
+}
+
+.input-glow:focus {
+  box-shadow: 0 0 0 2px rgba(123, 189, 232, 0.2);
+}

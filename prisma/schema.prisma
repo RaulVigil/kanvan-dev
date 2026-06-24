@@ -1,0 +1,57 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+enum Plan {
+  FREE
+  PREMIUM
+}
+
+model User {
+  id        String   @id
+  email     String   @unique
+  name      String?
+  plan      Plan     @default(FREE)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  boards    Board[]
+}
+
+model Board {
+  id        String   @id @default(uuid())
+  title     String
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  lists     List[]
+}
+
+model List {
+  id        String   @id @default(uuid())
+  title     String
+  position  Float
+  boardId   String
+  board     Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  cards     Card[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Card {
+  id          String    @id @default(uuid())
+  title       String
+  description String?
+  startDate   DateTime?
+  dueDate     DateTime?
+  position    Float
+  listId      String
+  list        List      @relation(fields: [listId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
