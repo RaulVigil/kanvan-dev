@@ -12,7 +12,7 @@ import {
   createCard,
   moveCard,
 } from "@/app/boards/[boardId]/actions";
-import type { Board, List, Card } from "@/generated/prisma/client";
+import type { Board, List, Card } from "@prisma/client";
 
 type BoardWithLists = Board & { lists: (List & { cards: Card[] })[] };
 
